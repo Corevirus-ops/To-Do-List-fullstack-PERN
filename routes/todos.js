@@ -5,7 +5,7 @@ const router = Router();
 router.get('/', async (req, res) => {
 try {
     const todos = await db.query('SELECT * FROM todo');
-    res.json(todos.rows[0]);
+    res.json(todos.rows);
 } catch (err) {
     console.error(err);
 }
@@ -14,7 +14,7 @@ try {
 router.post('/', async (req, res) => {
 try {
     const {description, completed} = req.body;
-const newTodo = await db.query('INSERT INTO todo (description, completed) VALUES ($1, $2)',
+const newTodo = await db.query('INSERT INTO todo (description, completed) VALUES ($1, $2) RETURNING *',
     [description, completed || false]);
     res.json(newTodo.rows[0]);
 } catch (err) {
