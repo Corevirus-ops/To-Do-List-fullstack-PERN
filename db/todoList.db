@@ -4,3 +4,5 @@ CREATE TABLE todo (
     description VARCHAR(255) NOT NULL,
     completed BOOLEAN DEFAULT FALSE
 );
+
+INSERT INTO todo (description, completed) VALUES ('test 1', false);
