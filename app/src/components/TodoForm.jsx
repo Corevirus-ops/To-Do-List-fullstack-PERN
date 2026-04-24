@@ -16,10 +16,10 @@ export default function TodoForm({setTodoItems}) {
     }
 
     return (
-        <div className="flex pt-2">
-        <form className="flex p-2 border-2 border-gray-300 rounded-xl shadow-xs shadow-gray-400 justify-evenly" onSubmit={handleSubmit}>
+        <div className="flex p-2 w-s">
+        <form className="flex p-2 border-2 border-gray-300 rounded-xl shadow-xs shadow-gray-400 justify-evenly w-xl text-3xl" onSubmit={handleSubmit}>
             <input className="flex focus-within:outline-none" type="text" value={newTodo} onChange={(e) => setNewToDo(e.target.value)} placeholder="What do you plan to do?" />
-            <button type="submit" className="cursor-pointer hover:text-blue-500 text-2xl"><IoMdAddCircleOutline/></button>
+            <button type="submit" className="cursor-pointer hover:text-blue-500 text-4xl"><IoMdAddCircleOutline/></button>
         </form>
         </div>
     )
