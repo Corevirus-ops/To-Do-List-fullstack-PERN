@@ -1,4 +1,5 @@
 import TodoForm from "./components/TodoForm";
+import TodoItems from "./components/TodoItems";
 import { useState, useEffect } from "react";
 import axios from "axios";
 
@@ -9,8 +10,6 @@ async function getTodos() {
   try {
     const todos = await axios.get('http://localhost:5000/todos');
     setTodoItems(todos.data);
-        alert(JSON.stringify(todos.data));
-
   } catch (e) {
     console.error(e);
   }
@@ -27,6 +26,7 @@ async function getTodos() {
         <div className="flex flex-col gap-3 bg-gray-50 p-5 rounded-md shadow-gray-500 shadow-2xl min-w-2xl items-center">
           <h1 className="text-gray-600 text-6xl">My Todo List</h1>
               <TodoForm />
+              <TodoItems todoItems={todoItems}/>
         </div>
      </div>
     </>
