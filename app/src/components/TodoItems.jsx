@@ -1,6 +1,6 @@
 import { useState } from "react";
 import axios from "axios";
-import {FaPen, FaTrash, FaPlusSquare, FaBackspace} from 'react-icons/fa';
+import {FaPen, FaTrash, FaPlusSquare, FaBackspace, FaCheckCircle, FaRegCircle} from 'react-icons/fa';
 
 export default function TodoItems({todoItems, setTodoItems}) {
     const [newText, setNewText] = useState('');
@@ -26,13 +26,28 @@ export default function TodoItems({todoItems, setTodoItems}) {
         }
     }
 
+        async function handleUpdate(item) {
+        try {
+            await axios.put(`http://localhost:5000/todos/${item.id}`, {description: newText, completed: false})
+            setTodoItems(todoItems.map((todo) => (todo.id == item.id ? 
+                {...todo, completed: false, description: newText } : todo
+            )));
+            setNewText('');
+            setEditToDo(null);
+        } catch (err) {
+            console.error(err);
+        }
+    }
+
+
+
     return (
         <div className="flex w-fit flex-col gap-5">
         {todoItems.length > 0 && todoItems.map((item) => 
                 editToDo != item.id ?
             <div className="flex border-2 rounded-md border-gray-300 w-sm p-1.5 shadow-gray-400 shadow-xs justify-between">
                 <section className="flex gap-5">
-                <input type="checkbox" checked={item.completed} onChange={() => handleComplete(item)} />
+                <button onClick={() => handleComplete(item)} className={`${item.completed && 'text-green-500'} cursor-pointer`} >{item.completed ? <FaCheckCircle/> : <FaRegCircle/>}</button>
                 <span>{item.description}</span>
                 </section>
                 <div className="flex gap-5">
@@ -44,8 +59,8 @@ export default function TodoItems({todoItems, setTodoItems}) {
             <div className="flex justify-evenly gap-1 border-2 rounded-md border-gray-400 w-sm p-2 shadow-gray-400 shadow-xs">
                 <input type="text" value={newText} onChange={(e) => setNewText(e.target.value)} className="focus:outline-none"/>
                 <div className="flex gap-5 justify-between">
-           <button className="text-green-600 cursor-pointer hover:text-green-500"><FaPlusSquare/></button>
-           <button className="text-blue-600 scale-120 cursor-pointer hover:text-blue-500"><FaBackspace/></button>
+           <button onClick={() => handleUpdate(item)} className="text-green-600 cursor-pointer hover:text-green-500"><FaPlusSquare/></button>
+           <button onClick={() => setEditToDo(null)} className="text-blue-600 scale-120 cursor-pointer hover:text-blue-500"><FaBackspace/></button>
                 </div>
             </div>
         )
