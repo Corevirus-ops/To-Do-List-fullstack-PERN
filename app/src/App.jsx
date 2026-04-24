@@ -26,7 +26,7 @@ async function getTodos() {
         <div className="flex flex-col gap-3 bg-gray-50 p-5 rounded-md shadow-gray-500 shadow-2xl min-w-2xl items-center">
           <h1 className="text-gray-600 text-6xl">My Todo List</h1>
               <TodoForm setTodoItems={setTodoItems} />
-              <TodoItems todoItems={todoItems}/>
+              <TodoItems todoItems={todoItems} setTodoItems={setTodoItems}/>
         </div>
      </div>
     </>
