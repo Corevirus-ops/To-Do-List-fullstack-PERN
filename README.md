@@ -17,6 +17,7 @@ Took a break due to life issues, trying smaller projects to rebuild and relearn 
 ---
 * react-icons
 * tailwind css
+* axios
 ---
 
 ### 🫵
