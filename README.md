@@ -2,7 +2,7 @@
 
 ---
 Took a break due to life issues, trying smaller projects to rebuild and relearn core abilities and reactive design.
----
+- Simple to do list with filtering, login, and user management. Make To Dos and separate using active, or completed
 
 ## Backend modules
 
@@ -10,6 +10,9 @@ Took a break due to life issues, trying smaller projects to rebuild and relearn 
 * pg
 * express
 * cors
+* passportjs
+* express-session
+* bcryptjs
 ---
 
 ## Frontend modules using vite build
@@ -18,6 +21,7 @@ Took a break due to life issues, trying smaller projects to rebuild and relearn 
 * react-icons
 * tailwind css
 * axios
+* react-router-dom
 ---
 
 ![Can Checkmark Items](./images/img1.png)
