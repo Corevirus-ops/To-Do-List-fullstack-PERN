@@ -2,7 +2,8 @@
 
 ---
 Took a break due to life issues, trying smaller projects to rebuild and relearn core abilities and reactive design.
-- Simple to do list with filtering, login, and user management. Make To Dos and separate using active, or completed
+
+ A Simple to do list with filtering, login, and user management. Make To Dos and separate using active, or completed using MVC architechture
 
 ## Backend modules
 
