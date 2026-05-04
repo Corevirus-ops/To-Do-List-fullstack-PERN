@@ -2,15 +2,17 @@ import { useState, useEffect, Suspense, lazy} from "react";
 // import TodoForm from "../components/todoPage/TodoForm";
 // import TodoItems from "../components/todoPage/TodoItems";
 import axios from "axios";
+import { useNavigate } from "react-router-dom";
 
 const TodoForm = lazy(() => import("../components/todoPage/TodoForm"));
 const TodoItems = lazy(() => import("../components/todoPage/TodoItems"));
 
 
-export default function TodoPage() {
+export default function TodoPage({user}) {
 const [todoItems, setTodoItems] = useState([]);
 const [error, setError] = useState("");
 
+const navigate = useNavigate();
 
 async function getTodos() {
   try {
@@ -21,6 +23,12 @@ async function getTodos() {
     console.error(e);
   }
 }
+
+useEffect(() => {
+if (user.id == null) {
+  navigate('/login');
+}
+})
   
   useEffect(() => {
      getTodos();

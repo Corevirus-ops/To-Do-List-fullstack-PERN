@@ -1,13 +1,20 @@
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import axios from "axios";
 
-export default function LoginPage() {
+export default function LoginPage({user}) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPass, setShowPass] = useState(false);
     const [error, setError] = useState("test");
 const navigate = useNavigate();
+
+useEffect(() => {
+    if (user.id != null) {
+        navigate('/todos')
+    }
+
+});
 
 function handleEmail(e) {
 if (e.target.value.length >= 100) return
@@ -31,7 +38,7 @@ try {
         setError(res.data.msg);
     }
     if (res.data.loggedIn) {
-        window.location.href = import.meta.env.VITE_CLIENT_NETWORK;
+        window.location.href = `${import.meta.env.VITE_CLIENT_NETWORK}/todos`;
     }
 
 } catch (err) {

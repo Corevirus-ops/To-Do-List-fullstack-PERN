@@ -87,5 +87,13 @@ router.delete('/logout', function(req, res, next) {
   });
 });
 
+router.get('/user', (req, res) => {
+    if (req?.user) {
+        res.json({user: req.user, loggedIn: true})
+    } else {
+        res.json({loggedIn: false});
+    }
+})
+
 
 module.exports = router;
