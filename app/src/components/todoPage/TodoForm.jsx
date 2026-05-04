@@ -1,16 +1,18 @@
 import { useState } from "react";
 import {IoMdAddCircleOutline} from 'react-icons/io';
 import axios from "axios";
-export default function TodoForm({setTodoItems}) {
+export default function TodoForm({setTodoItems, setError}) {
     const [newTodo, setNewToDo] = useState('');
 
     async function handleSubmit(e) {
         e.preventDefault();
         if (newTodo.trim().length < 1) return;
         try {
-            const newItem = await axios.post(`http://${import.meta.env.VITE_NETWORK}/todos`, {description: newTodo, completed: false});
+            const res = await axios.post(`http://${import.meta.env.VITE_NETWORK}/todos`, {description: newTodo, completed: false});
+            if (res.data.err) { return setError(res.data.msg || "There was an issue with your request")}
             setNewToDo('');
-            setTodoItems((prev) => [...prev, newItem.data]);
+            setTodoItems((prev) => [...prev, res.data]);
+            setError("");
         } catch (err) {
             console.error(err);
         }

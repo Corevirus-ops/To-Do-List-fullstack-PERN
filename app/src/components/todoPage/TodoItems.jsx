@@ -2,14 +2,16 @@ import { useState } from "react";
 import axios from "axios";
 import {FaPen, FaTrash, FaPlusSquare, FaBackspace, FaCheckCircle, FaRegCircle} from 'react-icons/fa';
 
-export default function TodoItems({todoItems, setTodoItems}) {
+export default function TodoItems({todoItems, setTodoItems, setError}) {
     const [newText, setNewText] = useState('');
     const [editToDo, setEditToDo] = useState(null);
 
     async function handleDelete(id) {
         try {
-            await axios.delete(`http://${import.meta.env.VITE_NETWORK}/todos/${id}`);
+           const res = await axios.delete(`http://${import.meta.env.VITE_NETWORK}/todos/${id}`);
+           if (res.data.err) { return setError(res.data.msg || "There was an issue with your request")}
             setTodoItems((prev) => prev.filter(item => item.id != id));
+            setError("");
         } catch (err) { 
             console.error(err);
         }
@@ -17,10 +19,12 @@ export default function TodoItems({todoItems, setTodoItems}) {
 
     async function handleComplete(item) {
         try {
-            await axios.put(`http://${import.meta.env.VITE_NETWORK}/todos/${item.id}`, {description: item.description, completed: !item.completed})
+            const res = await axios.put(`http://${import.meta.env.VITE_NETWORK}/todos/${item.id}`, {description: item.description, completed: !item.completed});
+            if (res.data.err) { return setError(res.data.msg || "There was an issue with your request")}
             setTodoItems(todoItems.map((todo) => (todo.id == item.id ? 
                 {...todo, completed: !todo.completed } : todo
-            )))
+            )));
+            setError("");
         } catch (err) {
             console.error(err);
         }
@@ -29,12 +33,14 @@ export default function TodoItems({todoItems, setTodoItems}) {
         async function handleUpdate(item) {
 
         try {
-            await axios.put(`http://${import.meta.env.VITE_NETWORK}/todos/${item.id}`, {description: newText, completed: false})
+            const res = await axios.put(`http://${import.meta.env.VITE_NETWORK}/todos/${item.id}`, {description: newText, completed: false});
+            if (res.data.err) { return setError(res.data.msg || "There was an issue with your request")}
             setTodoItems(todoItems.map((todo) => (todo.id == item.id ? 
                 {...todo, completed: false, description: newText } : todo
             )));
             setNewText('');
             setEditToDo(null);
+            setError("");
         } catch (err) {
             console.error(err);
         }
@@ -44,7 +50,7 @@ export default function TodoItems({todoItems, setTodoItems}) {
 
     return (
         <div className="flex flex-col gap-10 p-5 overflow-auto items-center w-11/12">
-        {todoItems.length > 0 && todoItems.map((item, index) => 
+        {todoItems.length > 0 && todoItems?.map((item, index) => 
                 editToDo != item.id ?
             <div key={index} className="flex border-2 rounded-md border-gray-300 p-1.5 shadow-gray-400 shadow-xs w-11/12 justify-between">
                 <section className="flex gap-5">
