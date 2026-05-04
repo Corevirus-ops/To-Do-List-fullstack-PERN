@@ -35,12 +35,12 @@ passport.deserializeUser(function(user, cb) {
 });
 
 
-router.post('/login/password', passport.authenticate('local', {
+router.post('/login', passport.authenticate('local', {
    successRedirect: `${process.env.NETWORK}/${process.env.CLIENT_PORT}/`,
    failureRedirect: `${process.env.NETWORK}/${process.env.CLIENT_PORT}/login`
 }));
 
-router.post('/create-account', async (req, res) => {
+router.post('/new-account', async (req, res) => {
   const {name, email, password } = req.body;
   if (!name || !email || !password) {return res.json({err: true, msg: "All Fields Are Required!!"})}
  

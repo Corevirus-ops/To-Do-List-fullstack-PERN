@@ -28,7 +28,7 @@ app.use(passport.authenticate('session'));
 
 app.use('/todos', todosRouter);
 
-app.use('/', authRouter);
+app.use('/api', authRouter);
 
 app.listen(port, () => {
 console.log(`listening on port: ${port}`)
