@@ -15,13 +15,25 @@ const port = process.env.PORT || 5000;
 
 const app = express();
 
-app.use(cors());
+app.use(cors({
+  origin: `${process.env.NETWORK}:${process.env.CLIENT_PORT}`,
+  credentials: true,
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
+  allowedHeaders: ['Content-Type', 'Authorization', 'X-Requested-With']
+}));
 app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
 app.use(session({
   secret: 'comichi wassup',
   resave: false,
-  saveUninitialized: false
+  saveUninitialized: false,
+  cookie: {
+    maxAge: 1000 * 60 * 60 * 24,     
+    httpOnly: true,
+    secure: false,                    
+    sameSite: 'lax'                  
+  }
 }));
 
 app.use(passport.authenticate('session'));
