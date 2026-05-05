@@ -39,10 +39,10 @@ try {
     }
     if (res.data.loggedIn) {
         window.location.href = `${import.meta.env.VITE_CLIENT_NETWORK}/todos`;
-    }
+    } 
 
 } catch (err) {
-    console.log(err);
+    console.error(err);
     setError('Something Went Wrong');
 }
 }

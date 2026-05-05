@@ -44,7 +44,7 @@ passport.deserializeUser(function(user, cb) {
 
 router.post('/login', async (req, res) => {
     const {email, password} = req.body;
-  db.query('SELECT * FROM users WHERE email = $1', [email], async function(err, user) {
+  db.query('SELECT * FROM users WHERE email = $1', [email.toLowerCase()], async function(err, user) {
     if (err) {return res.status(500)}
     if (!user.rows[0]) {return res.json({err: true, msg: 'Incorrect email or password.' });}
     const match = await bcrypt.compare(password, user.rows[0].password);
@@ -67,7 +67,7 @@ router.post('/new-account', async (req, res) => {
   const salt = await bcrypt.genSalt(10);
   const hashPassword = await bcrypt.hash(password, salt);
 
-  const newUser = await db.query('INSERT INTO users (name, email, password) VALUES($1, $2, $3) RETURNING *', [name, email, hashPassword]);
+  const newUser = await db.query('INSERT INTO users (name, email, password) VALUES($1, $2, $3) RETURNING *', [name.toLowerCase(), email, hashPassword]);
 
 if (!newUser.rows[0]) {return res.status(500).json({err: true, msg: "Something Went Wrong"})}
 
