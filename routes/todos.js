@@ -3,7 +3,7 @@ const db = require('../db/tododb.js');
 const router = Router();
 
 router.get('/', async (req, res) => {
-     const userId = req.user.id;
+     const userId = req?.user?.id;
     try {
     const todos = await db.query('SELECT * FROM todo WHERE user_id = $1', [userId]);
     res.json(todos.rows);
@@ -14,7 +14,7 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    const userId = req.user.id;
+    const userId = req?.user?.id;
 try {
     const {description, completed} = req.body;
 
@@ -31,7 +31,7 @@ const newTodo = await db.query('INSERT INTO todo (description, completed, user_i
 });
 
 router.put('/:id', async (req, res) => {
-    const userId = req.user.id;
+    const userId = req?.user?.id;
 try {
     const {id} = req.params;
     const {description, completed} = req.body;
@@ -51,7 +51,7 @@ try {
 });
 
 router.delete('/:id', async (req, res) => {
-    const userId = req.user.id;
+    const userId = req?.user?.id;
 try {
     const {id} = req.params;
     const deletedTodo = await db.query('DELETE FROM todo WHERE id = $1 AND user_id = $2 RETURNING *', [id, userId]);

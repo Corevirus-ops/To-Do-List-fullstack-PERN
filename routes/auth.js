@@ -74,7 +74,7 @@ if (!newUser.rows[0]) {return res.status(500).json({err: true, msg: "Something W
 newUser.rows[0].password = null;
     req.logIn(newUser.rows[0], function(err) {
         if (err) { throw err }
-        res.redirect(`${process.env.NETWORK}/${process.env.CLIENT_PORT}/`);
+        res.status(201).json({loggedIn: true});
     });
 
 });
@@ -83,7 +83,7 @@ newUser.rows[0].password = null;
 router.delete('/logout', function(req, res, next) {
   req.logout(function(err) {
     if (err) { return next(err); }
-    res.redirect(`${process.env.NETWORK}/${process.env.CLIENT_PORT}/login`);
+    res.status(204).json({loggedIn: false});
   });
 });
 
