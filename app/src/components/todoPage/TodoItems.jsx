@@ -52,13 +52,13 @@ export default function TodoItems({todoItems, setTodoItems, setError}) {
 
     return (
         <>
-     <section className="flex gap-2 w-full justify-evenly m-5">
+     <section className="flex gap-2 w-full justify-evenly">
         <button className="cursor-pointer" onClick={() => setFiltered("")} >{!filtered ? <FaCheckCircle className="text-green-500"/> : <FaRegCircle/>} No Filter</button>
         <button className="cursor-pointer" onClick={() => setFiltered("completed")}>{filtered == "completed" ? <FaCheckCircle className="text-green-500"/> : <FaRegCircle/>} Completed</button>
         <button className="cursor-pointer" onClick={() => setFiltered("todo")}>{filtered == "todo" ? <FaCheckCircle className="text-green-500"/> : <FaRegCircle/>} Left To Do</button>
         
         </section>   
-        <div className="flex flex-col gap-10 p-5 overflow-auto items-center w-11/12">
+        <div className="flex flex-col gap-10 overflow-auto items-center w-11/12 min-h-full">
         {todoItems.length > 0 && todoItems?.map((item, index) => {
             const ItemCard = <TodoItemCard key={index} setEditToDo={setEditToDo} handleDelete={handleDelete} setNewText={setNewText} item={item} handleComplete={handleComplete} handleUpdate={handleUpdate} editToDo={editToDo} newText={newText} />
                 if (!filtered) return ItemCard  

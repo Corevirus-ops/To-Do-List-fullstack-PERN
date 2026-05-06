@@ -1,12 +1,13 @@
 import { useNavigate } from "react-router-dom";
 import { useState, useEffect } from "react";
+import { FaUserCircle } from "react-icons/fa";
 import axios from "axios";
 
 export default function LoginPage({user}) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
     const [showPass, setShowPass] = useState(false);
-    const [error, setError] = useState("test");
+    const [error, setError] = useState("");
 const navigate = useNavigate();
 
 useEffect(() => {
@@ -48,12 +49,13 @@ try {
 }
 
     return(
-        <div className="flex justify-center items-center w-screen h-screen">
-        <div className="bg-gray-100 border-4 border-blue-400 shadow-black shadow-2xl rounded-md w-3/5 h-9/12 flex flex-col text-center text-2xl font-serif">
-        <h1 className="p-10 text-7xl">Login</h1>
+        <div className="flex justify-center items-center w-screen h-screen ">
+        <div className="bg-gray-100 border-4 border-blue-400 shadow-black shadow-2xl rounded-md sm:w-full sm:h-full lg:w-3/5 lg:h-9/12 flex flex-col text-center text-2xl font-serif justify-around">
+        <h1 className="text-6xl">Login</h1>
         {error && <h3 className="text-red-500">{error}</h3>}
-        <form className="flex flex-col justify-center content-center p-12 gap-2" onSubmit={handleLogin}>
-            <section className="flex flex-col w-full gap-6">
+        <form className="flex flex-col overflow-auto" onSubmit={handleLogin}>
+            <section className="flex flex-col w-full gap-6 justify-center content-center">
+            <FaUserCircle className="w-full text-8xl text-gray-800" />
                 <label className="p-2">Email: <input type="email" className="outline-gray-400 outline-2 rounded-md p-2" placeholder="email@something.com" required value={email} onChange={handleEmail}/></label>
                 <label className="p-2">Password: <input type={showPass ? "text" : "password"} placeholder="password123" className="outline-gray-400 outline-2 rounded-md p-2" required value={password} onChange={handlePassword} pattern="[^\s]+"/>
                     <input className="p-2 size-5.5 m-2 text-center" type="checkbox" checked={showPass} onChange={() => setShowPass(!showPass)} /></label>
