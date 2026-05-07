@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 import TodoPage from "./pages/TodoPage";
 import NavBarMain from './components/navBar/NavBarMain';
 import LoginPage from './pages/LoginPage';
+import SignUp from './pages/SignUp';
 import axios from 'axios';
 
 axios.defaults.withCredentials = true;
@@ -39,6 +40,7 @@ const navigate = useNavigate();
         <Route path="/todos" element={<TodoPage user={user} setUser={setUser} />} />
         <Route path="/" element={<h1>Loading...</h1>} />
         <Route path="/login" element={<LoginPage user={user} />} />
+        <Route path="/new-account" element={<SignUp user={user} />} />
       </Routes>
      </div>
   )
