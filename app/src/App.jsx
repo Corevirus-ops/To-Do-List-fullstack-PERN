@@ -40,7 +40,7 @@ const navigate = useNavigate();
         <Route path="/todos" element={<TodoPage user={user} setUser={setUser} />} />
         <Route path="/" element={<h1>Loading...</h1>} />
         <Route path="/login" element={<LoginPage user={user} />} />
-        <Route path="/new-account" element={<SignUp user={user} />} />
+        <Route path="/new-account" element={<SignUp user={user}  />} />
       </Routes>
      </div>
   )

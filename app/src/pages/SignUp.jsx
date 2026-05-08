@@ -1,7 +1,7 @@
-import { useState} from "react";
+import { useState, useEffect} from "react";
 import { useNavigate } from "react-router-dom";
 import axios from "axios";
-export default function SignUp() {
+export default function SignUp({user}) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
     const [conEmail, setConEmail] = useState("");
@@ -11,6 +11,13 @@ export default function SignUp() {
     const [error, setError] = useState("");
 
     const navigate = useNavigate();
+
+useEffect(() => {
+    if (user.id != null) {
+        navigate('/todos')
+    }
+
+});
 
     function handleName(e) {
         const val = e.target.value;
@@ -53,8 +60,14 @@ export default function SignUp() {
             if (!name || !email || !conEmail || !password || !conPassword) {return setError("All Fields Are Required")}
             if (email != conEmail) {return setError("Emails Do Not Match")}
             if (password != conPassword) {return setError("Passwords Do Not Match")}
-            
-            // const res = axios.post(`http://${import.meta.env.VITE_NETWORK}/api/new-account`, {});
+            if (password.length < 6) {return setError("Password Needs to be atleast 6 characters")}
+
+             const res = await axios.post(`http://${import.meta.env.VITE_NETWORK}/api/new-account`, {name, email, password});
+             if (res.data.err) {return setError(res.data.msg || "Something Went Wrong")}
+             if (res.status != 201 || !res.data.loggedIn) {return setError(res.data.msg || "Something Went Wrong")}
+             if (res.data.loggedIn) {
+                 window.location.href = `${import.meta.env.VITE_CLIENT_NETWORK}/todos`;
+             }
 
         } catch (err) {
             console.error(err);
@@ -78,7 +91,7 @@ export default function SignUp() {
                     <input className="p-2 size-5.5 m-2 text-center" type="checkbox" checked={showPass.passCon} onChange={() => setShowPass(prev => ({...prev, passCon: !showPass.passCon }))}  /></div></label>
             </section>
             <section className="text-xl flex w-full gap-2 justify-center p-6">
-                <button className="cursor-pointer border-gray-400 rounded-md bg-gray-800 text-white border-2 p-4 hover:bg-gray-500" type="button" onClick={() => navigate('/login')}>Have An account Already?</button>
+                <button className="cursor-pointer border-gray-400 rounded-md bg-gray-800 text-white border-2 p-4 hover:bg-gray-500" type="button" onClick={() => navigate('/login')}>Have An Account Already?</button>
                 <button className="cursor-pointer border-gray-400 rounded-md border-2 p-4 hover:bg-cyan-100" type="submit">Sign Up</button>
             </section>
         </form>
