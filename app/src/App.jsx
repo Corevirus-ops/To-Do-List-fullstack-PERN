@@ -6,6 +6,7 @@ import NavBarMain from './components/navBar/NavBarMain';
 import LoginPage from './pages/LoginPage';
 import SignUp from './pages/SignUp';
 import axios from 'axios';
+import Footer from './pages/Footer';
 
 axios.defaults.withCredentials = true;
 function App() {
@@ -34,7 +35,7 @@ const navigate = useNavigate();
 
 
   return (
-     <div className="bg-blue-950 min-w-[90vw] min-h-[90vh] flex flex-col sm:overflow-auto justify-center">
+     <div className="bg-blue-950 min-w-[90vw] min-h-[90vh] flex flex-col sm:overflow-auto justify-center relative">
       <NavBarMain />
       <Routes>
         <Route path="/todos" element={<TodoPage user={user} setUser={setUser} />} />
@@ -42,6 +43,7 @@ const navigate = useNavigate();
         <Route path="/login" element={<LoginPage user={user} />} />
         <Route path="/new-account" element={<SignUp user={user}  />} />
       </Routes>
+      <Footer />
      </div>
   )
 }

@@ -25,9 +25,16 @@ Took a break due to life issues, trying smaller projects to rebuild and relearn 
 * react-router-dom
 ---
 
-![Can Checkmark Items](./images/img1.png)
-![Can Input New Fields](./images/img2.png)
-![Can Edit Items](./images/img3.png)
-![Persistance for each item](./images/img4.png)
+![Login Preview](./images/img1.png)
+![SignUp Preview](./images/img2.png)
+![todo landing](./images/img3.png)
+![Completed Filter](./images/img4.png)
+![Left To Do Filter](./images/img5.png)
+![To Do Extended or Long Form (part 1)](./images/img6.png)
+![To Do Extended or Long Form (part 2)](./images/img7.png)
 
 ### 🫵
+
+#### Next Steps
+* Integrate Facebook and Goole Login / Sign Up Options
+* Phase in some form of Navbar for further complexity
