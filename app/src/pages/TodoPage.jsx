@@ -50,7 +50,7 @@ if (user.id == null) {
 
   return (
     <>
-<div className="flex flex-col gap-3 bg-gray-50 rounded-md shadow-gray-500 shadow-2xl items-center sm:h-screen sm:w-screen md:text-2xl lg:h-4/5 lg:w-4/5 m-auto overflow-auto">
+<div className="flex flex-col gap-3 bg-gray-50 rounded-md shadow-gray-500 shadow-2xl items-center md:text-2xl lg:w-4/5 m-auto">
 <section className="flex flex-col w-full items-end p-5 relative">
 <button className="cursor-pointer text-gray-700 hover:text-gray-500 z-10" onMouseEnter={() => setLogoutHint(true)} onMouseLeave={() => setLogoutHint(false)} onClick={logOut} ><FaBackspace /></button>
 {logoutHint && <p className="absolute bottom-0">Logout</p>}

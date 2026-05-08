@@ -49,8 +49,8 @@ try {
 }
 
     return(
-        <div className="flex justify-center items-center w-screen h-screen ">
-        <div className="bg-gray-100 border-4 border-blue-400 shadow-black shadow-2xl rounded-md sm:w-full sm:h-full lg:w-3/5 lg:h-9/12 flex flex-col text-center text-2xl font-serif justify-around">
+        <div className="flex justify-center items-center">
+        <div className="bg-gray-100 border-4 border-blue-400 shadow-black shadow-2xl rounded-md sm:w-full sm:h-full lg:w-3/5 lg:h-9/12 flex flex-col gap-6 text-center text-2xl font-serif justify-around">
         <h1 className="text-6xl">Login</h1>
         {error && <h3 className="text-red-500">{error}</h3>}
         <form className="flex flex-col overflow-auto" onSubmit={handleLogin}>

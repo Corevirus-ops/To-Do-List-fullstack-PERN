@@ -34,7 +34,7 @@ const navigate = useNavigate();
 
 
   return (
-     <div className="bg-blue-950 h-screen w-screen flex flex-col sm:overflow-auto justify-center">
+     <div className="bg-blue-950 min-w-[90vw] min-h-[90vh] flex flex-col sm:overflow-auto justify-center">
       <NavBarMain />
       <Routes>
         <Route path="/todos" element={<TodoPage user={user} setUser={setUser} />} />
